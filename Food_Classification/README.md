@@ -20,14 +20,16 @@
 - 만족할만한 성능 (90% 이상)으로 학습시키기에는 컴퓨팅 자원이 부족
 
 
-# Food_Classification_with_OpenAI_API
+# FoodClassifier
 - GPT-4o 모델을 이용하여 음식 분류
 
 
 ## How to use
-1. 환경변수에 'GPT_API_KEY'라는 이름으로 OpenAI API Key 등록
-2. 명령행 인자로 이미지 경로 입력
+1. 환경변수에 'OPENAI_API_KEY'라는 이름으로 OpenAI API Key 등록
+2. classify_food 함수를 <이미지 경로> 인자로하여 호출
+  ```py
+  from FoodClassifier import classify_food
+
+  print(classify_food('<image path>'))
   ```
-  python3 Food_Classification_with_OpenAI_API.py <image path>
-  ```
-3. 분류된 카테고리 표준 출력으로 출력
+3. 분류된 음식 종류 한국어로 반환
