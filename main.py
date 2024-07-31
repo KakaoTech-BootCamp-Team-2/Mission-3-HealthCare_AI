@@ -30,6 +30,7 @@ async def root():
 async def classify_router(item: FoodClassifyQuery):
     food = classify_food(item.image_path)
 
-    db.execute(f'INSERT INTO food(diet_id, food_name) VALUES ({item.diet_id}, "{food}")')
+    query = f'INSERT INTO food(diet_id, food_name, created_at, created_by, modified_at, modified_by) VALUES ({item.diet_id}1, "{food}", CURDATE(), "system", CURDATE(), "system")'
+    db.execute(query)
 
     return {'message': 'success', 'category': food}
