@@ -25,19 +25,23 @@ class DB:
         try:
             self.cur.execute(query)
 
-            self.logger.info(f'Success to execute query: {query}')
+            self.logger.info(f'Success to execute query: "{query}"')
 
             if (type(self.cur.description) == tuple):
-                query_result = []
-                for result in self.cur:
-                    query_result.append(result)
+                field_list = [ desc[0] for desc in self.cur.description ]
 
-                return query_result
+                field_value_list = []
+                for query_row in self.cur:
+                    field_value_list.append({ field : value for field, value in zip(field_list, query_row) })
+
+                return field_value_list
             else:
                 return {'message': 'sucess'}
 
         except mariadb.Error as e:
-            self.logger.error(f'Fail to execute {query}: {e}')
+            self.logger.error(f'Fail to execute query: "{query}"')
+            self.logger.error(f'Error: {e}')
+                              
 
             return {'message': 'fail'}
 
